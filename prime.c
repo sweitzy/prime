@@ -1,6 +1,6 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.9 2025/08/01 14:36:37 scott Exp scott $
+// $Id: prime.c,v 1.10 2025/08/25 01:00:27 scott Exp scott $
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,11 +46,24 @@ int prime(int min, int max) {
 
     int is_prime = true;
 
-#if 1
     // try to divide (odd) number by all lower odd numbers, count up
     // instead of down as we are more likely to be able to divide by
     // lower (odd) numbers, this is more readable too!
-    for (int up = 3; up < i; up += 2) {
+
+
+    // Newer ChatGPT code Aug 2025 vs Jan 2024 has an interesting improvment
+    // involving square root.
+
+    // You use the square root when checking for prime numbers because
+    // if a number, n, is composite (not prime), it can be factored
+    // into two numbers, a and b, such that n = a x b. If you find a
+    // factor a greater than the square root of n, there must be a
+    // corresponding factor b that is less than the square root of
+    // n. Therefore, you only need to check for factors up to the
+    // square root of n to determine if n has any factors other than 1
+    // and itself.  HUGE SPEEDUP!
+
+    for (int up = 3; up * up <= i; up += 2) {
       DEBUG("i %d up %d\n", i, up);
       if (i % up == 0) {
 	DEBUG("i %d mod up %d is not prime\n", i, up);
@@ -58,17 +71,6 @@ int prime(int min, int max) {
 	break;
       }
     }
-# else
-    // try to divide (odd) number by all lower odd numbers
-    for (int down = i - 2; down >= 3; down -= 2) {
-      DEBUG("i %d down %d\n", i, down);
-      if (i % down == 0) {
-	DEBUG("i %d mod down %d is not prime\n", i, down);
-	is_prime = false;
-	break;
-      }
-    }
-#endif
     
     if (is_prime) {
       OUTPUT("%d\n", i);
