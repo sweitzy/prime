@@ -1,6 +1,6 @@
 performance data
 
-# $Id: performance.txt,v 1.4 2025/08/25 01:00:48 scott Exp scott $
+# $Id: performance.txt,v 1.5 2025/08/25 01:14:18 scott Exp scott $
 
 ------------------------------------------------------------------------------
 C
@@ -98,3 +98,12 @@ prime %
 5.49 time speedup
 
 *** Python is still 40 times slower than C THOUGH!!! ***
+
+8/24/25: add sqrt optimization
+
+prime % time ./prime.py 
+num_primes = 78498
+./prime.py  0.87s user 0.02s system 60% cpu 1.471 total
+
+424 time speedup!!!  DAMN!
+
