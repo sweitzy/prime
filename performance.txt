@@ -1,0 +1,100 @@
+performance data
+
+# $Id: performance.txt,v 1.4 2025/08/25 01:00:48 scott Exp scott $
+
+------------------------------------------------------------------------------
+C
+
+//real	7m41.339s
+//user	7m39.577s
+//sys	0m0.783s
+
+//real	8m10.080s
+//user	7m29.265s
+//sys	0m0.555s
+
+    // I can skip even numbers.
+// real	3m55.544s
+// user	3m53.362s
+// sys	0m0.461s
+
+// -O
+// real	3m33.577s
+// user	3m28.759s
+// sys	0m0.578s
+
+// MBA -g
+// ./prime.x  112.35s user 0.40s system 99% cpu 1:53.39 total
+// MBA -O
+// ./prime.x  0.00s user 0.00s system 2% cpu 0.139 total
+//  TODO: Wait, what???  Optimizer pitches code that doesn't do anything!
+// Add counting primes and printing total number of primes
+// MBA num_primes = 78498
+// MBA ./prime.x  54.62s user 0.16s system 99% cpu 54.957 total
+// MBP: real	2m58.196s
+// user	2m56.646s
+// sys	0m0.318s
+// MBA is 6 times as fast!
+more MBA times:
+./prime.x  52.10s user 0.07s system 99% cpu 52.222 total
+./prime.x  51.94s user 0.07s system 99% cpu 52.032 total
+
+Count up instead of down:
+./prime.x  9.32s user 0.02s system 99% cpu 9.344 total
+WOW!  5.57 times speedup!
+
+8/24/25: I asked ChatGPT on iPhone to write a C program to calculate
+prime, and it gave me an even more optimized using sqrt!
+
+prime % time ./prime.new.x 
+num_primes = 78498
+./prime.new.x  0.05s user 0.00s system 10% cpu 0.488 total
+
+186 time speedup!
+
+------------------------------------------------------------------------------
+Python
+
+prime % time ./prime.py > prime.1000000.py.txt
+./prime.py > prime.1000000.py.txt  2142.59s user 5.22s system 99% cpu 36:02.91 total
+prime % time ./prime.py > prime.1000000.py.txt
+./prime.py > prime.1000000.py.txt  2186.15s user 4.12s system 46% cpu 1:18:49.37 total
+
+Interesting how 2nd run only used 46% CPU vs 99%.
+
+take out prints from python
+time ./prime.py
+2
+num_primes = 78498
+./prime.py  2131.96s user 2.35s system 66% cpu 53:24.49 total
+prime % time ./prime.py
+2
+num_primes = 78498
+./prime.py  2092.93s user 2.76s system 34% cpu 1:42:37.66 total
+prime % time ./prime.py
+2
+num_primes = 78498
+./prime.py  2021.80s user 3.03s system 99% cpu 33:47.29 total
+prime % time ./prime.py
+2
+num_primes = 78498
+./prime.py  2030.31s user 2.92s system 99% cpu 33:58.83 total
+prime %
+
+34 MINUTES!
+
+Interesting how run-time consistent, but CPU usage something lower.  I wonder why?
+
+Count up instead of down:
+
+prime % time ./prime.py
+num_primes = 78498
+./prime.py  368.92s user 0.44s system 99% cpu 6:10.20 total
+prime % time ./prime.py
+num_primes = 78498
+./prime.py  377.73s user 0.51s system 88% cpu 7:09.35 total
+prime %
+
+5.49 time speedup
+
+*** Python is still 40 times slower than C THOUGH!!! ***
