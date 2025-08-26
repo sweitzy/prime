@@ -1,6 +1,6 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.12 2025/08/26 02:08:06 scott Exp scott $
+// $Id: prime.c,v 1.13 2025/08/26 15:33:42 scott Exp scott $
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,12 +25,6 @@
 int prime(int min, int max) {
   int num_primes = 0;
   
-  // check for min > max
-  if (min > max) {
-    fprintf(stderr, "ERROR: min %d must be <= max %d\n", min, max);
-    return -1;
-  }
-
   // if all negative numbers, nothing to do
   if (max < 2) {
     return num_primes;
@@ -94,25 +88,31 @@ int prime(int min, int max) {
 
 int main(int argc, char **argv) {
   int num_primes = -1;
+
+  // defaults
+  int min = -2;
+  int max = 10000;
   
   // TODO: option to skip output, just time output?  I kinda lkke
   // compile time option instead.  Can use multiple makefile targets
   // too.
   
   if (argc == 3) {
-    num_primes = prime(atoi(argv[1]), atoi(argv[2]));
+    min = atoi(argv[1]);
+    max = atoi(argv[2]);
   } else if (argc == 2) {
-    num_primes = prime(1, atoi(argv[1]));
-  } else {
-
-    // pick a reasonable set
-    
-    // TODO: just print usage message?
-
-    num_primes = prime(-2, 1000000);
+    max = atoi(argv[1]);
   }
 
-  printf("num_primes = %d\n", num_primes);
+  // check for min > max
+  if (min > max) {
+    fprintf(stderr, "ERROR: min %d must be <= max %d\n", min, max);
+    return 1;
+  }
+
+  num_primes = prime(min, max);
+
+  printf("min = %d, max = %d, num_primes = %d\n", min, max, num_primes);
   return 0;
 }
 
