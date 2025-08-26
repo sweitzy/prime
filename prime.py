@@ -2,7 +2,7 @@
 
 # prime.py: calculate prime numbers
 
-# $Id: prime.py,v 1.3 2025/08/25 01:14:18 scott Exp scott $
+# $Id: prime.py,v 1.4 2025/08/26 01:58:34 scott Exp scott $
 
 import math
 
@@ -33,32 +33,6 @@ def prime(min, max):
             continue
 
         is_prime = True
-
-#        # try to divide (odd) number by all lower odd numbers
-#        #my_range = list(range(i - 2, 2, -2))
-#        ###print(f"my_range {my_range}")
-#        for down in range(i - 2, 2, -2):
-#            ###print(f"i {i} down {down}")
-#            if i % down == 0:
-#                ###print(f"i {i} mod down {down} is not prime")
-#                is_prime = False
-#                break
-
-        # try to divide (odd) number by all lower odd numbers, count up
-        # instead of down as we are more likely to be able to divide by
-        # lower (odd) numbers, this is more readable too!
-
-        # Newer ChatGPT code Aug 2025 vs Jan 2024 has an interesting improvment
-        # involving square root.
-        
-        # You use the square root when checking for prime numbers because
-        # if a number, n, is composite (not prime), it can be factored
-        # into two numbers, a and b, such that n = a x b. If you find a
-        # factor a greater than the square root of n, there must be a
-        # corresponding factor b that is less than the square root of
-        # n. Therefore, you only need to check for factors up to the
-        # square root of n to determine if n has any factors other than 1
-        # and itself.  HUGE SPEEDUP!
 
         for up in range(3, int(math.sqrt(i)) + 1, +2):
             ###print(f"i {i} up {up}")

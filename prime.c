@@ -1,6 +1,6 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.10 2025/08/25 01:00:27 scott Exp scott $
+// $Id: prime.c,v 1.11 2025/08/26 01:58:34 scott Exp scott $
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -61,7 +61,9 @@ int prime(int min, int max) {
     // corresponding factor b that is less than the square root of
     // n. Therefore, you only need to check for factors up to the
     // square root of n to determine if n has any factors other than 1
-    // and itself.  HUGE SPEEDUP!
+    // and itself.  HUGE SPEEDUP!  This is O(sqrt), there are faster,
+    // more complicated algorithms, but that's not what I'm going for
+    // here.
 
     for (int up = 3; up * up <= i; up += 2) {
       DEBUG("i %d up %d\n", i, up);
