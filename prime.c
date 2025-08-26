@@ -1,18 +1,25 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.11 2025/08/26 01:58:34 scott Exp scott $
+// $Id: prime.c,v 1.12 2025/08/26 02:08:06 scott Exp scott $
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 // https://www.mathsisfun.com/prime_numbers.html
+// TODO: write a program to compare my results with this site
 
-//#define DEBUG(...) printf(__VA_ARGS__)
+// C is unique in that is has a preprocessor, which people like the X
+// Window System group abused horribly in the 80's with their image
+// utility (using C macros to create Makefiles, clever but so fugly).
+
+#if 0
+#define DEBUG(...) printf(__VA_ARGS__)
+#define OUTPUT(...) printf(__VA_ARGS__)
+#else
 #define DEBUG(...)
-
-//#define OUTPUT(...) printf(__VA_ARGS__)
 #define OUTPUT(...)
+#endif
 
 // wow, have to actually do  something, or -O will optimize away!
 int prime(int min, int max) {
