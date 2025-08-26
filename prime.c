@@ -1,6 +1,6 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.13 2025/08/26 15:33:42 scott Exp scott $
+// $Id: prime.c,v 1.14 2025/08/26 16:06:28 scott Exp scott $
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
 
   // defaults
   int min = -2;
-  int max = 10000;
+  int max = 50000000;
   
   // TODO: option to skip output, just time output?  I kinda lkke
   // compile time option instead.  Can use multiple makefile targets

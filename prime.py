@@ -2,7 +2,7 @@
 
 # prime.py: calculate prime numbers
 
-# $Id: prime.py,v 1.4 2025/08/26 01:58:34 scott Exp scott $
+# $Id: prime.py,v 1.5 2025/08/26 16:06:28 scott Exp scott $
 
 import math
 
@@ -53,6 +53,8 @@ def prime(min, max):
 
 # TODO: command-line arguments
 
-num_primes = prime(1, 1000000)
+min = 1
+max = 50000000
+num_primes = prime(min, max)
 #num_primes = prime(1, 100)
-print(f"num_primes = {num_primes}")
+print(f"min = {min}, max = {max}, num_primes = {num_primes}")
