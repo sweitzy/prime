@@ -1,13 +1,15 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.15 2025/09/04 03:11:32 scott Exp scott $
+// $Id: prime.c,v 1.16 2025/09/04 03:33:30 scott Exp scott $
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 // https://www.mathsisfun.com/prime_numbers.html
-// TODO: write a program to compare my results with this site
+// I looked at the code for this site, and it has a list of
+// primes < 100,000 hardcoded in images/prime-is-it.js.
+// My list and this list check out.
 
 // C is unique in that is has a preprocessor, which people like the X
 // Window System group abused horribly in the 80's with their imake
@@ -15,12 +17,18 @@
 // I have to admit I used it to at my Talarian startup to generate
 // platform-specific Makefiles.
 
+// Enabling OUTPUT will print every prime number.
 #if 0
-#define DEBUG(...) printf(__VA_ARGS__)
 #define OUTPUT(...) printf(__VA_ARGS__)
 #else
-#define DEBUG(...)
 #define OUTPUT(...)
+#endif
+
+// Enabling DEBUG will print debug info about each test.
+#if 0
+#define DEBUG(...) printf(__VA_ARGS__)
+#else
+#define DEBUG(...)
 #endif
 
 // wow, have to actually do  something, or -O will optimize away!
