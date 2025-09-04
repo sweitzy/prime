@@ -1,6 +1,6 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.14 2025/08/26 16:06:28 scott Exp scott $
+// $Id: prime.c,v 1.15 2025/09/04 03:11:32 scott Exp scott $
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,8 +10,10 @@
 // TODO: write a program to compare my results with this site
 
 // C is unique in that is has a preprocessor, which people like the X
-// Window System group abused horribly in the 80's with their image
+// Window System group abused horribly in the 80's with their imake
 // utility (using C macros to create Makefiles, clever but so fugly).
+// I have to admit I used it to at my Talarian startup to generate
+// platform-specific Makefiles.
 
 #if 0
 #define DEBUG(...) printf(__VA_ARGS__)
@@ -115,4 +117,3 @@ int main(int argc, char **argv) {
   printf("min = %d, max = %d, num_primes = %d\n", min, max, num_primes);
   return 0;
 }
-
