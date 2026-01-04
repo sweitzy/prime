@@ -1,6 +1,6 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.16 2025/09/04 03:33:30 scott Exp scott $
+// $Id: prime.c,v 1.17 2026/01/04 02:25:31 scott Exp $
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -100,7 +100,7 @@ int main(int argc, char **argv) {
   int num_primes = -1;
 
   // defaults
-  int min = -2;
+  int min = 1;
   int max = 50000000;
   
   // TODO: option to skip output, just time output?  I kinda lkke
