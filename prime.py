@@ -2,24 +2,24 @@
 
 # prime.py: calculate prime numbers
 
-# $Id: prime.py,v 1.6 2026/01/04 04:42:22 scott Exp scott $
+# $Id: prime.py,v 1.7 2026/01/04 05:45:46 scott Exp scott $
 
 import sys
 import math
 
-def prime(min, max):
+def prime(min_val, max_val):
     num_primes = 0 
 
-    if min > max:
+    if min_val > max_val:
         return num_primes
 
-    if max < 2:
+    if max_val < 2:
         return num_primes
     
-    if min < 3:
+    if min_val < 3:
         num_primes += 1
         
-    for i in range(3, max + 1):
+    for i in range(3, max_val + 1):
         if i % 2 == 0:
             continue
 
