@@ -1,10 +1,11 @@
 // prime.c: calculate prime numbers
 
-// $Id: prime.c,v 1.17 2026/01/04 02:25:31 scott Exp $
+// $Id: prime.c,v 1.18 2026/01/04 05:39:19 scott Exp scott $
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 
 // https://www.mathsisfun.com/prime_numbers.html
 // I looked at the code for this site, and it has a list of
@@ -32,21 +33,21 @@
 #endif
 
 // wow, have to actually do  something, or -O will optimize away!
-int prime(int min, int max) {
+int prime(int min_val, int max_val) {
   int num_primes = 0;
   
   // if all negative numbers, nothing to do
-  if (max < 2) {
+  if (max_val < 2) {
     return num_primes;
   }
 
   // special case < 3: 2 is prime
-  if (min < 3) {
+  if (min_val < 3) {
     OUTPUT("2\n");
     num_primes++;
   }
 
-  for (int i = 3; i <= max; i++) {
+  for (int i = 3; i <= max_val; i++) {
     DEBUG("CHECKING %d\n", i);
 
     // special case: even number
@@ -76,7 +77,13 @@ int prime(int min, int max) {
     // more complicated algorithms, but that's not what I'm going for
     // here.
 
-    for (int up = 3; up * up <= i; up += 2) {
+    // Python ChatGPT code uses range(), and makes one call to sqrt()
+    // instead of checking up * up <= i, and this speeds up the Python
+    // code quite a bit (342 sec down to 193 sec!).  The C speedup
+    // is neglible, but Pythonic range() is important.
+    int limit = (int)sqrt(i);
+
+    for (int up = 3; up <= limit; up += 2) {
       DEBUG("i %d up %d\n", i, up);
       if (i % up == 0) {
 	DEBUG("i %d mod up %d is not prime\n", i, up);
@@ -100,28 +107,28 @@ int main(int argc, char **argv) {
   int num_primes = -1;
 
   // defaults
-  int min = 1;
-  int max = 50000000;
+  int min_val = 1;
+  int max_val = 50000000;
   
   // TODO: option to skip output, just time output?  I kinda lkke
   // compile time option instead.  Can use multiple makefile targets
   // too.
   
   if (argc == 3) {
-    min = atoi(argv[1]);
-    max = atoi(argv[2]);
+    min_val = atoi(argv[1]);
+    max_val = atoi(argv[2]);
   } else if (argc == 2) {
-    max = atoi(argv[1]);
+    max_val = atoi(argv[1]);
   }
 
-  // check for min > max
-  if (min > max) {
-    fprintf(stderr, "ERROR: min %d must be <= max %d\n", min, max);
+  // check for min_val > max_val
+  if (min_val > max_val) {
+    fprintf(stderr, "ERROR: min %d must be <= max %d\n", min_val, max_val);
     return 1;
   }
 
-  num_primes = prime(min, max);
+  num_primes = prime(min_val, max_val);
 
-  printf("min = %d, max = %d, num_primes = %d\n", min, max, num_primes);
+  printf("min = %d, max = %d, num_primes = %d\n", min_val, max_val, num_primes);
   return 0;
 }
