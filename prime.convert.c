@@ -1,27 +1,23 @@
 // prime.convert.c: stripped down code to feed to http://codeconvert.ai
 
-// $Id: prime.convert.c,v 1.1 2026/01/04 04:05:59 scott Exp scott $
+// $Id: prime.convert.c,v 1.2 2026/01/04 05:24:54 scott Exp scott $
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 
 int prime(int min, int max) {
   int num_primes = 0;
   
-  // if all negative numbers, nothing to do
   if (max < 2) {
     return num_primes;
   }
 
-  // special case < 3: 2 is prime
   if (min < 3) {
     num_primes++;
   }
 
   for (int i = 3; i <= max; i++) {
 
-    // special case: even number
     if (i % 2 == 0) {
       continue;
     } 
@@ -57,7 +53,6 @@ int main(int argc, char **argv) {
     max = atoi(argv[1]);
   }
 
-  // check for min > max
   if (min > max) {
     fprintf(stderr, "ERROR: min %d must be <= max %d\n", min, max);
     return 1;
